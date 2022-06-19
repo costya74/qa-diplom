@@ -9,20 +9,12 @@
 ```
 docker-compose up
 ```
+
 6. Запускаем SUT 
-<<<<<<< HEAD
 ```
 java -jar artifacts/aqa-shop.jar
-=======
->MySQL
 ```
-java -Dspring.datasource.url=jdbc:mysql://localhost:3306/app -jar artifacts/aqa-shop.jar
-```
->PostgreSQL
-```
-java -Dspring.datasource.url=jdbc:postgresql://localhost:5433/app -jar artifacts/aqa-shop.jar
->>>>>>> 2215cbb5b7034e9fd4beb9b01856382d65f3824a
-```
+
 #### Приложение должно запуститься на:
 ```
 http://localhost:8080. 
@@ -34,7 +26,6 @@ java -jar app-order.jar -port=9090
 
 >для MySQL
 ```
-<<<<<<< HEAD
 ./gradlew clean test -Durl=jdbc:mysql://localhost:3306/app
 ```
 >для PostgreSQL
@@ -45,19 +36,8 @@ java -jar app-order.jar -port=9090
 ```
 ./gradlew clean test allureReport
 ./gradlew allureServe
-=======
-gradlew clean test -Durl=jdbc:mysql://localhost:3306/app
 ```
->для PostgreSQL
-```
-gradlew clean test -Durl=jdbc:postgreSQL://localhost:5433/app
-```
-8. Генерация отчетов
-```
-gradlew clean test allureReport
-gradlew allureServe
->>>>>>> 2215cbb5b7034e9fd4beb9b01856382d65f3824a
-```
+
 9. Завершение работы AllureServe
 ```
 Ctrl+C => Y
