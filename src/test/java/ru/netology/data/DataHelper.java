@@ -1,77 +1,161 @@
 package ru.netology.data;
 
-import lombok.Value;
+import com.github.javafaker.Faker;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 public class DataHelper {
-    static DataGenerator dateGenerator = new DataGenerator();
+    private static Faker fakerEn = new Faker(new Locale("en"));
+    private static Faker fakerRu = new Faker(new Locale("ru"));
 
-    @Value
-    public static class CardInfo {
-        String cardNumber;
-        String year;
-        String month;
-        String owner;
-        String cvc;
+    private DataHelper() {
     }
 
-    public static CardInfo getApprovedCardInformation() {
-        return new CardInfo(DataGenerator.getApprovedCardNumber(),
-                dateGenerator.getValidExpirationDate().getYear(),
-                dateGenerator.getValidMonth().getMonth(), DataGenerator.getValidOwner(),
-                DataGenerator.getValidCvc());
+    public static String getFirstCardNumber() {
+        return "4444 4444 4444 4441";
     }
 
-    public static CardInfo getDeclinedCardInformation() {
-        return new CardInfo(DataGenerator.getDeclinedCardNumber(),
-                dateGenerator.getValidExpirationDate().getYear(),
-                dateGenerator.getValidMonth().getMonth(),
-                DataGenerator.getValidOwner(), DataGenerator.getValidCvc());
+    public static String getSecondCardNumber() {
+        return "4444 4444 4444 4442";
     }
 
-    public static CardInfo getInvalidCardInformation() {
-        return new CardInfo(DataGenerator.getInvalidCardNumber(),
-                dateGenerator.getValidExpirationDate().getYear(),
-                dateGenerator.getValidMonth().getMonth(), DataGenerator.getValidOwner(),
-                DataGenerator.getValidCvc());
+    public static String getFirstCardStatus() {
+        return "APPROVED";
     }
 
-    public static CardInfo getExpiredMonthCardInformation() {
-        return new CardInfo(DataGenerator.getApprovedCardNumber(),
-                dateGenerator.getCurrentYear().getYear(),
-                dateGenerator.getExpiredMonth().getMonth(),
-                DataGenerator.getValidOwner(), DataGenerator.getValidCvc());
+    public static String getSecondCardStatus() {
+        return "DECLINED";
     }
 
-    public static CardInfo getExpiredYearCardInformation() {
-        return new CardInfo(DataGenerator.getApprovedCardNumber(),
-                dateGenerator.getExpiredYear().getYear(),
-                dateGenerator.getValidMonth().getMonth(),
-                DataGenerator.getValidOwner(), DataGenerator.getValidCvc());
+    public static String getEmptyCardNumber() {
+        return "";
     }
 
-    public static CardInfo getInvalidExpirationDateCardInformation() {
-        return new CardInfo(DataGenerator.getApprovedCardNumber(),
-                dateGenerator.getInvalidExpirationDate().getYear(),
-                dateGenerator.getValidMonth().getMonth(), DataGenerator.getValidOwner(),
-                DataGenerator.getValidCvc());
+    public static String getRandomCardNumber() {
+        return fakerEn.business().creditCardNumber();
     }
 
-    public static CardInfo getEmptyCardInformation() {
-        return new CardInfo(" ", " ", " ", " ", " ");
+    public static String getCardNumberWith15Digits() {
+        return "4444 4444 4444 444";
     }
 
-    public static CardInfo getValidCardNumberWithInvalidOtherFields() {
-        return new CardInfo(DataGenerator.getApprovedCardNumber(),
-                dateGenerator.getInvalidYear().getYear(),
-                dateGenerator.getInvalidMonth().getMonth(),
-                DataGenerator.getInvalidOwner(), DataGenerator.getInvalidCvc());
+    public static String getCardNumberWith1Digit() {
+        return fakerEn.number().digits(1);
     }
 
-    public static CardInfo getInvalidOwnerCard() {
-        return new CardInfo(DataGenerator.getApprovedCardNumber(),
-                dateGenerator.getValidExpirationDate().getYear(),
-                dateGenerator.getValidMonth().getMonth(),
-                DataGenerator.getInvalidOwner(),
-                DataGenerator.getValidCvc());
+    public static String getCardNumberWithTextAndChars() {
+        return "номер карты!";
+    }
+
+    public static String getValidMonth() {
+        String validMonth = LocalDate.now().format(DateTimeFormatter.ofPattern("MM"));
+        return validMonth;
+    }
+
+    public static String getEmptyMonth() {
+        return "";
+    }
+
+    public static String getMonthOver12() {
+        return "13";
+    }
+
+    public static String getZeroMonth() {
+        return "00";
+    }
+
+    public static String getInvalidFormatMonth() {
+        return fakerEn.number().digit();
+    }
+
+    public static String getMonthWithText() {
+        return "октябрь";
+    }
+
+    public static String getValidYear() {
+        String validYear = LocalDate.now().format(DateTimeFormatter.ofPattern("yy"));
+        return validYear;
+    }
+
+    public static String getEmptyYear() {
+        return "";
+    }
+
+    public static String getPastYear() {
+        String pastYear = LocalDate.now().minusYears(1).format(DateTimeFormatter
+                .ofPattern("yy"));
+        return pastYear;
+    }
+
+    public static String getInvalidFormatYear() {
+        return fakerEn.number().digit();
+    }
+
+    public static String getFutureYear() {
+        String futureYear = LocalDate.now().plusYears(10).format(DateTimeFormatter.ofPattern("yy"));
+        return futureYear;
+    }
+
+    public static String getYearWithText() {
+        return "двадцать третий";
+    }
+
+    public static String getValidOwner() {
+        return fakerEn.name().firstName() + " " + fakerEn.name().lastName();
+    }
+
+    public static String getEmptyOwner() {
+        return "";
+    }
+
+    public static String getOnlyNameOwner() {
+        return fakerEn.name().firstName();
+    }
+
+    public static String getLowercaseLettersOwner() {
+        return fakerEn.name().firstName().toLowerCase(Locale.ROOT) + " " + fakerEn.name()
+                .lastName().toLowerCase(Locale.ROOT);
+    }
+
+    public static String getUppercaseLettersOwner() {
+        return fakerEn.name().firstName().toUpperCase(Locale.ROOT) + " " + fakerEn.name().lastName().toUpperCase(Locale.ROOT);
+    }
+
+    public static String getRedundantDataOwner() {
+        return "Ivan Ivanov Ivanovich";
+    }
+
+    public static String getCyrillicDataOwner() {
+        return fakerRu.name().fullName();
+    }
+
+    public static String getTwoAlphabetsDataOwner() {
+        return fakerRu.name().firstName() + " " + fakerEn.name().lastName();
+    }
+
+    public static String getOwnerWithDigits() {
+        return fakerEn.number().digits(5);
+    }
+
+    public static String getOwnerWithSpecialChars() {
+        return "!№%?*";
+    }
+
+    public static String getValidCode() {
+        return fakerEn.number().digits(3);
+    }
+
+    public static String getEmptyCode() {
+        return "";
+    }
+
+    public static String getInvalidFormatCode() {
+        return fakerEn.number().digits(2);
+    }
+
+    public static String getCodeWithText() {
+        return "код";
     }
 }
