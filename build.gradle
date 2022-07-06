@@ -42,11 +42,12 @@ dependencies {
 test {
     useJUnitPlatform()
     systemProperty 'selenide.headless', System.getProperty('selenide.headless')
-//    testLogging.showStandardStreams = true
-//    systemProperty 'junit.jupiter.extensions.autodetection.enabled', true
-//    systemProperty 'url', System.getProperty('url')
-//    systemProperty 'username', System.getProperty('username', 'app')
-//    systemProperty 'password', System.getProperty('password', 'pass')
-//    systemProperty 'sut.url', System.getProperty('sut.url', 'http://localhost:8080')
-    systemProperty 'datasource.url', System.getProperty('datasource.url','jdbc:mysql://localhost:3306/app')
+    testLogging.showStandardStreams = true
+    systemProperty 'junit.jupiter.extensions.autodetection.enabled', true
+    systemProperty 'db.url', System.getProperty('db.url')  //передача в сборку url базы данных
+    systemProperty 'db.username', System.getProperty('db.username', 'app')
+    systemProperty 'db.password', System.getProperty('db.password', 'pass')
+    systemProperty 'sut.url', System.getProperty('sut.url', 'http://localhost:8080')
+//    systemProperty 'datasource.url', System.getProperty('datasource.url','jdbc:mysql://localhost:3306/app')
+//   systemProperty 'datasource.url', System.getProperty('datasource.url','jdbc:postgresql://localhost:5432/app')
 }

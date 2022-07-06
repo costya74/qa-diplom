@@ -16,8 +16,13 @@ docker-compose up -d
 ```![img.png](img.png)```
 
 6. Запускаем SUT 
+
+ + Для MySQL:
+```java "-Dspring.datasource.url=jdbc:mysql://localhost:3306/app" -jar artifacts/aqa-shop.jar```
+
++ Для PostgreSQL:
 ```
-java -jar artifacts/aqa-shop.jar
+java "-Dspring.datasource.url=jdbc:postgresql://localhost:5432/app" -jar artifacts/aqa-shop.jar
 ```
 
 #### Приложение должно запуститься на:

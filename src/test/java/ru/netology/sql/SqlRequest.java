@@ -9,7 +9,7 @@ import java.sql.DriverManager;
 
 public class SqlRequest {
 
-    private static final String DB_URL = System.getProperty("datasource.url");
+    private static final String DB_URL = System.getProperty("db.url");
 
     private SqlRequest() {
     }
