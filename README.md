@@ -6,18 +6,22 @@
 3. Подключите DataBase(используя mySql, postgresql)
 4. Запускаем Docker контейнеры СУБД MySQL и PostgreSQL
 5. Запустить контейнеры в терминале 
+
 ```
 docker-compose up -d
 ```
 проверяем, что контейнеры запустились:
+
 ```docker ps```
 
 смотрим статус контейнеров в консоле
+
 ```![img.png](img.png)```
 
 6. Запускаем SUT 
 
  + Для MySQL:
+ 
 ```java "-Dspring.datasource.url=jdbc:mysql://localhost:3306/app" -jar artifacts/aqa-shop.jar```
 
 + Для PostgreSQL:
